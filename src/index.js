@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5501;
 
 // Middleware global
 app.use(express.json());
@@ -19,7 +19,7 @@ app.get("/health", (req, res) => {
 // Rota de teste
 app.get("/", (req, res) => {
   res.json({
-    message: "🚀 MinURL API rodando!",
+    message: "🚀 MinURL API rodando!!!!",
     version: "1.0.0",
     endpoints: {
       health: "/health",
