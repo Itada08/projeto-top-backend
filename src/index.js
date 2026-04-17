@@ -6,7 +6,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5500;
+const PORT = process.env.PORT || 3000;
 
 // Middleware global
 app.use(express.json());
@@ -32,4 +32,3 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor em http://localhost:${PORT}`);
 });
-

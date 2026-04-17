@@ -1,49 +1,30 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
-  output   = "../generated/prisma"
 }
 
 datasource db {
   provider = "postgresql"
 }
 
-model Course {
-  id          BigInt   @id @default(autoincrement())
-  name        String
-  description String?
-  teacher     String?
-
-  // Relações
-  users           User[]           @relation("CourseUsers")
-  courseStudents  CourseStudent[]
-}
-
 model User {
-  id         BigInt   @id @default(autoincrement())
-  name       String
-  birthDate  DateTime
-  password   String
-  email      String   @unique
-  courseId   BigInt?
+  id        BigInt   @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String
+  birthDate DateTime?
 
   // Relações
-  course          Course?         @relation("CourseUsers", fields: [courseId], references: [id])
-  courseStudents  CourseStudent[]
+  notes Note[]
 }
 
-model CourseStudent {
-  courseId BigInt
-  userId   BigInt
-  grade    Float?
+model Note {
+  id        BigInt   @id @default(autoincrement())
+  title     String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    BigInt
 
   // Relações
-  course Course @relation(fields: [courseId], references: [id])
-  user   User   @relation(fields: [userId], references: [id])
-
-  @@id([courseId, userId])
+  user User @relation(fields: [userId], references: [id])
 }
